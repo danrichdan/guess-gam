@@ -8,6 +8,11 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"
     />
+    <style>
+      .help {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <section class="section">
@@ -19,33 +24,29 @@
           Guess a Number between <span class="min-num">1</span> and
           <span class="max-num">10</span> You get <strong>3</strong> tries!
         </p>
-        <div class="level">
-          <!--Level Left Begin-->
-          <div class="level-left">
-            <!--Level Item Begin-->
-            <div class="level-item">
-              <div class="field">
-                <div class="control">
-                  <input
-                    class="input"
-                    type="text"
-                    placeholder="Guess A Number"
-                  />
-                </div>
+
+        <div class="columns">
+          <div class="column is-one-fifth">
+            <div class="field">
+              <div class="control">
+                <input
+                  id="guess"
+                  class="input"
+                  type="text"
+                  placeholder="Guess A Number"
+                />
               </div>
-            </div>
-            <!--Level Item End-->
-            <!--Level Item End-->
-            <div class="level-item">
-              <button class="button">
-                Submit Guess
-              </button>
+              <p class="help">You Guessed Correctly</p>
             </div>
           </div>
-          <!--Level Left End-->
+          <div class="column">
+            <button id="guess-button" class="button">
+              Submit Guess
+            </button>
+          </div>
         </div>
-        <!--Level End-->
       </div>
     </section>
+    <script src="main.js"></script>
   </body>
 </html>
