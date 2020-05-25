@@ -19,31 +19,39 @@ function evaluateGuess() {
   guess = Number(guess);
   guessesLeft -= 1;
   if (guess === numberToGuess) {
-    gameWin(guess, guessesLeft);
+    gameEnd("success");
+    displayMsg("win", guess);
   } else if (guess !== numberToGuess && guessesLeft === 0) {
-    gameLose(guess, guessesLeft);
+    gameEnd("danger");
+    displayMsg("lose", guess, guessesLeft);
   } else {
-    console.log(
-      `You guessed ${guess}, but that is wrong, you have ${guessesLeft} guesses left.`
-    );
     guessInput.value = "";
+    displayMsg("try again", guess, guessesLeft);
   }
 }
 
-function gameWin(guess, guessesLeft) {
+function gameEnd(gameState) {
   guessInput.setAttribute("disabled", "true");
-  guessInput.classList.add("is-success");
-  msg.classList.add("is-success");
-  msg.textContent = `${guess} is correct. You win!`;
-  msg.style.display = "block";
+  guessInput.classList.add(`is-${gameState}`);
+  msg.classList.add(`is-${gameState}`);
   guessBtn.textContent = "Play Again";
+  guessBtn.removeEventListener("click", evaluateGuess);
+  guessBtn.addEventListener("click", function () {
+    window.location.reload();
+  });
 }
 
-function gameLose(guess, guessesLeft) {
-  guessInput.setAttribute("disabled", "true");
-  guessInput.classList.add("is-danger");
-  msg.classList.add("is-danger");
-  msg.textContent = `${guess} is wrong, ${guessesLeft} guesses left, you lose.`;
+function displayMsg(gameState, guess, guessesLeft) {
+  switch (gameState) {
+    case "win":
+      msg.textContent = `${guess} is correct. You win!`;
+      break;
+    case "lose":
+      msg.textContent = `${guess} is wrong, ${guessesLeft} guesses left, you lose.`;
+      break;
+    default:
+      msg.textContent = `You guessed ${guess}, wrong, ${guessesLeft} guesses left.`;
+      break;
+  }
   msg.style.display = "block";
-  guessBtn.textContent = "Play Again";
 }
