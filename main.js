@@ -3,8 +3,9 @@ const guessBtn = document.getElementById("guess-button");
 const guessInput = document.getElementById("guess");
 const numberToGuess = getRandomNumber();
 const msg = document.querySelector(".help");
+
+// Define Game Variables
 let guessesLeft = 3;
-console.log(`The number to guess is ${numberToGuess}`);
 
 // Event Listener
 guessBtn.addEventListener("click", evaluateGuess);
@@ -14,6 +15,7 @@ function getRandomNumber() {
   return Math.floor(Math.random() * 10 + 1);
 }
 
+// Evaluate the Guesses
 function evaluateGuess() {
   let guess = guessInput.value;
   guess = Number(guess);
@@ -30,10 +32,16 @@ function evaluateGuess() {
   }
 }
 
+// Game Ending Functionality, win or lose
 function gameEnd(gameState) {
+  // Disable the input
   guessInput.setAttribute("disabled", "true");
+
+  // Add win or lose colors to input and message
   guessInput.classList.add(`is-${gameState}`);
   msg.classList.add(`is-${gameState}`);
+
+  // Restart Game
   guessBtn.textContent = "Play Again";
   guessBtn.removeEventListener("click", evaluateGuess);
   guessBtn.addEventListener("click", function () {
@@ -41,6 +49,7 @@ function gameEnd(gameState) {
   });
 }
 
+// Display the Message
 function displayMsg(gameState, guess, guessesLeft) {
   switch (gameState) {
     case "win":
