@@ -19,16 +19,22 @@ function getRandomNumber() {
 function evaluateGuess() {
   let guess = guessInput.value;
   guess = Number(guess);
-  guessesLeft -= 1;
-  if (guess === numberToGuess) {
-    gameEnd("success");
-    displayMsg("win", guess);
-  } else if (guess !== numberToGuess && guessesLeft === 0) {
-    gameEnd("danger");
-    displayMsg("lose", guess, guessesLeft);
+  if (guess < 1 || guess > 10) {
+    msg.textContent = "Enter a number between 1 and 10";
+    msg.style.color = "red";
+    msg.style.display = "block";
   } else {
-    guessInput.value = "";
-    displayMsg("try again", guess, guessesLeft);
+    guessesLeft -= 1;
+    if (guess === numberToGuess) {
+      gameEnd("success");
+      displayMsg("win", guess);
+    } else if (guess !== numberToGuess && guessesLeft === 0) {
+      gameEnd("danger");
+      displayMsg("lose", guess, guessesLeft);
+    } else {
+      guessInput.value = "";
+      displayMsg("try again", guess, guessesLeft);
+    }
   }
 }
 
